@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,12 +31,15 @@ public class Kenya47Counties extends AppCompatActivity {
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAllCountiesDialog(Kenya47Counties.this, "Select County",true, true, true);
+                showAllCountiesDialog(Kenya47Counties.this, "Select County", true, true, true);
             }
         });
     }
 
-    public static void showAllCountiesDialog(final Context context, String listTitle, boolean showCountyNumber, boolean showCountyFlag, boolean sortAlphabetically) {
+    private static County returnCounty;
+    public static County showAllCountiesDialog(final Context context, String listTitle, boolean showCountyNumber, boolean showCountyFlag, boolean sortAlphabetically) {
+
+        returnCounty = null;
 
         countyArrayList = new ArrayList<>();
 
@@ -90,9 +92,8 @@ public class Kenya47Counties extends AppCompatActivity {
         countyArrayList.add(new County(47, "Nairobi", R.drawable.nairobi));
 
 
-
         if (sortAlphabetically) Collections.sort(countyArrayList, new MyComparator());
-        CountiesAdapter customAdapter = new CountiesAdapter(context, countyArrayList,showCountyNumber, showCountyFlag );
+        CountiesAdapter customAdapter = new CountiesAdapter(context, countyArrayList, showCountyNumber, showCountyFlag);
 
         new AlertDialog.Builder(context)
                 .setTitle(listTitle)
@@ -100,11 +101,12 @@ public class Kenya47Counties extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        Toast.makeText(context, countyArrayList.get(which).getName(), Toast.LENGTH_SHORT).show();
+                        returnCounty = countyArrayList.get(which);
                         dialog.dismiss();
                     }
                 }).create().show();
+
+        return returnCounty;
     }
 
     static class MyComparator implements Comparator<County> {

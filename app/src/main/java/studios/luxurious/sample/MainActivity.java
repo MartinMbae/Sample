@@ -3,8 +3,10 @@ package studios.luxurious.sample;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import studios.luxurious.kenya47counties.activities.Kenya47Counties;
+import studios.luxurious.kenya47counties.models.County;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ShowCounties(View view) {
-        Kenya47Counties.showAllCountiesDialog(MainActivity.this,"Title",true, true,false);
+
+        County selectedCounty = Kenya47Counties.showAllCountiesDialog(MainActivity.this,"Title",true, true,false);
+
+        Toast.makeText(this, "Selection"+ selectedCounty.getName(), Toast.LENGTH_SHORT).show();
+
     }
 }
