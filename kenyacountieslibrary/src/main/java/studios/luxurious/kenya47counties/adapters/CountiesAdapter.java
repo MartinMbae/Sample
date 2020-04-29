@@ -56,7 +56,8 @@ public class CountiesAdapter extends BaseAdapter {
         countyName.setText(county.getName());
 
         if (showCountyFlag){
-            icon.setImageResource(county.getFlag());
+
+            icon.setImageDrawable(county.getFlag());
             icon.setVisibility(View.VISIBLE);
         }else {
             icon.setVisibility(View.GONE);

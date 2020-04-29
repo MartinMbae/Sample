@@ -1,48 +1,30 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
+ext {
+    bintrayRepo = 'KenyanCounties' // Repo name in bintray dashboard
+    bintrayName = 'studios.luxurious.kenya47counties' // package name of the bintray repo
 
-def githubProperties = new Properties()
-githubProperties.load(new FileInputStream(rootProject.file("github.properties"))) //Set env variable GPR_USER & GPR_API_KEY if not adding a properties file
+    publishedGroupId = 'com.martinmbae.kenyan.47counties'   // this is the ID we want to see in implementation line
+    libraryName = 'kenyacountieslibrary'     // this is the module name of library
+    artifact = 'library'        // this is the artifact we want to see in implementation line
 
-def getVersionName = { ->
-    return "1.0.0" // Replace with version Name
+    libraryDescription = 'An android library that displays all kenyan libraries for selection. Each library countains a name, county number and a flag' // description of library
+
+    siteUrl = 'https://github.com/MartinMbae/Sample'    // git repo url
+    gitUrl = 'https://github.com/MartinMbae/Sample.git' // git repo vcs url
+
+    libraryVersion = '1.0.1'      // library version
+
+    developerId = 'martinmbae'                // This is your bintray username
+    developerName = 'Martin Mbae'              // Developer's name
+    developerEmail = 'martinmbae.codemaster@gmail.com'                // Developer's email
+
+    licenseName = 'The Apache Software License, Version 2.0'  // for example, The Apache Software License, Version 2.0
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'   // for example, http://www.apache.org/licenses/LICENSE-2.0.txt
+    allLicenses = ["Apache-2.0"]    // array of licenses, for example, ["Apache-2.0"]
 }
 
-def getArtificatId = { ->
-    return "kenyacountieslibrary" // Replace with library name ID
-}
-
-
-publishing {
-    publications {
-        bar(MavenPublication) {
-            groupId 'com.martinmbae.libraries' // Replace with group ID
-            artifactId getArtificatId()
-            version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            /** Configure path of your package repository on Github
-             ** Replace GITHUB_USERID with your/organisation Github userID
-             ** and REPOSITORY with the repository name on GitHub
-             */
-            url = uri("https://maven.pkg.github.com/MartinMbae/Sample")
-            credentials {
-                /** Create github.properties in root project folder file with
-                 ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
-                 ** Set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
-
-                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-        }
-    }
-}
 
 
     android {
@@ -76,3 +58,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+apply from: 'publish.gradle'
+//apply from: 'bintray.gradle'

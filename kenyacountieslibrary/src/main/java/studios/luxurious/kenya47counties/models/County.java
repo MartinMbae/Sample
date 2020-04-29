@@ -1,11 +1,13 @@
 package studios.luxurious.kenya47counties.models;
 
+import android.graphics.drawable.Drawable;
+
 public class County {
     private int id;
     private String name;
-    private int flag;
+    private Drawable flag;
 
-    public County(int id, String name, int flag) {
+    public County(int id, String name, Drawable flag) {
         this.id = id;
         this.name = name;
         this.flag = flag;
@@ -19,7 +21,7 @@ public class County {
         return name;
     }
 
-    public int getFlag() {
+    public Drawable getFlag() {
         return flag;
     }
 

@@ -7,11 +7,4 @@
     android:orientation="vertical"
     tools:context=".activities.Kenya47Counties">
 
-
-    <Button
-        android:id="@+id/selectCountyBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select county"/>
-
 </LinearLayout>
